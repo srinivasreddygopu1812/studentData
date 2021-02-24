@@ -11,6 +11,6 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 	number:attributes.queryParams.studentId
 }]]]></db:input-parameters>
 		</db:delete>
-		<logger level="INFO" doc:name="Logger" doc:id="38f19044-543d-41b7-a1cb-89b03373704a" message="after delete operation &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; #[payload]"/>
+		<logger level="INFO" doc:name="Logger" doc:id="38f19044-543d-41b7-a1cb-89b03373704a" message="after delete operation payload &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; #[payload]"/>
 	</flow>
 </mule>
