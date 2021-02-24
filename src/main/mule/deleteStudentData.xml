@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<flow name="deleteStudentDataFlow" doc:id="7e762da4-0db8-474a-9dbf-2befb9078649" >
+		<db:delete doc:name="Delete" doc:id="67b12a6f-a6c1-4a70-a4c3-57b6951e19fa" config-ref="Database_Config">
+			<db:sql >DELETE FROM studentdata WHERE number=:number;</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	number:attributes.queryParams.studentId
+}]]]></db:input-parameters>
+		</db:delete>
+		<logger level="INFO" doc:name="Logger" doc:id="38f19044-543d-41b7-a1cb-89b03373704a" message="after delete operation &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; #[payload]"/>
+	</flow>
+</mule>

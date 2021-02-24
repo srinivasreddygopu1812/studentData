@@ -1,0 +1,65 @@
+#%RAML 1.0
+title: StudentData
+description: this api will maintain student data
+protocols:
+  - HTTP
+
+/studentdata:
+  post:
+    body:
+      application/json:
+        type: !include exchange_modules/54679225-dff4-42d1-8d61-5e180a8b1b1e/studentdatatype/1.0.0/studentdatatype.raml
+        example: !include studentDataExample.json
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {"message" : "student details added successfully"}
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include studentDataExample.json
+  /{id}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include studentDataExample.json
+                
+  put:
+    body:
+      application/json:
+        example: !include studentDataUpdate.json
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+               {"message" : "student details updated successfully"}
+  delete:
+    queryParameters:
+      studentId:
+        type: integer
+        description: "this is the student id"
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"message" : "student details deleted successfully"}
+        
+          
+        
+              
+          
+             
+             
+               
+                
+            
+            
+         

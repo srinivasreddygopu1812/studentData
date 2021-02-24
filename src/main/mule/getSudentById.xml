@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="getSudentByIdFlow1" doc:id="067f28ae-260d-402e-8d33-fea7f9380d5b" >
+		<db:select doc:name="Select" doc:id="4f784df4-a11b-46b3-9be4-78daffbb4ddb" config-ref="Database_Config">
+			<db:sql >SELECT * FROM studentdata
+WHERE number=:number;</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	number : attributes.uriParams.id as Number
+}]]]></db:input-parameters>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="60f8dd73-4e10-4a48-933e-df41f44bf3bb" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload map{
+  "number": $.number,
+  "name": $.name,
+  "address": $.address,
+  "class": $.class,
+  "age": $.age,
+  "gender": $.gender
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="92b1a118-f9e7-4dc5-a308-e4304aaf320e" message="Requested student data &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; #[payload]"/>
+	</flow>
+</mule>

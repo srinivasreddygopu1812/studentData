@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<flow name="updateStudentDataFlow" doc:id="02f81f33-05f2-468f-8f15-da59b75ae2ca" >
+		<db:update doc:name="Update" doc:id="0fd11b41-c22f-4739-8edd-3f2ba8af514d" config-ref="Database_Config">
+			<db:sql >UPDATE studentdata
+SET name = :name, age = :age
+WHERE number=:number;</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	name:payload.name,
+	age:payload.age,
+	number:payload.number
+	
+	
+}]]]></db:input-parameters>
+		</db:update>
+		<logger level="INFO" doc:name="Logger" doc:id="0aacc5f8-dadb-4f2c-bce3-c3c992e0a86b" message="after db opn &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; #[payload]"/>
+	</flow>
+</mule>
